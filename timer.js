@@ -6,58 +6,57 @@ var minutes = baseMinute;
 
 
 var started = false;
-var interval = setInterval(Update, 1000);
+var interval = setInterval(update, 1000);
 
 window.onload = function(){ 
-    SetText(minutes + ":00");
+    setText(minutes + ":00");
 }
 
-function Start(){
+function start(){
     started = !started;
     if(started &&  minutes < 0){
-        Reset();
+        reset();
     }
     if(started){
-        Stop();
+        stop();
     } else{
         document.getElementById("button").innerHTML = "Stop";
-        interval = setInterval(Update, 1000);
+        interval = setInterval(update, 1000);
     }
 }
 
-function Stop(){
+function stop(){
     document.getElementById("button").innerHTML = "Start";
     clearInterval(interval);
 }
 
 
-function Reset(){
-    minute = baseMinute;
+function reset(){
+    minutes = baseMinute;
     seconds = 0;
-    Stop();
+    stop();
     started = true;
-    SetText(minutes + ":00");
-    clearinterval(interval);
+    setText(minutes + ":00");
+    clearInterval(interval);
 }
 
-function Update(){
+function update(){
     seconds--;
     if(seconds < 0){
         seconds += 60;
         minutes--;
         if(minutes < 0) {
             EndSound.play();
-            Stop();
-            SetText("Time's up!");
+            stop();
+            setText("Time's up!");
             return;
         }
     }
-    console.log(seconds);
     seconds = seconds < 10 ? "0" + seconds : seconds;
-    SetText(minutes + ":" + seconds);
+    setText(minutes + ":" + seconds);
 }
 
-function SetText(text){
+function setText(text){
     document.getElementById("timer").innerHTML = text;
     document.title = text;
 }
