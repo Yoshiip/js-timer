@@ -32,7 +32,7 @@ function Stop(){
 
 
 function Reset(){
-    baseMinute = 2;
+    minute = baseMinute;
     seconds = 0;
     Stop();
     started = true;
